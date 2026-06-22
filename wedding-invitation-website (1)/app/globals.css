@@ -1,0 +1,207 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@theme inline {
+  --font-serif: var(--font-serif-elegant), ui-serif, Georgia, serif;
+  --font-script: var(--font-script), cursive;
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Royal palette */
+  --color-royal: var(--royal);
+  --color-royal-deep: var(--royal-deep);
+  --color-royal-light: var(--royal-light);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-deep: var(--gold-deep);
+  --color-bronze: var(--bronze);
+  --color-cream: var(--cream);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  color-scheme: dark;
+  --background: #4a0d14;
+  --foreground: #f7e9c4;
+
+  --royal: #7c1320;
+  --royal-deep: #3a0a10;
+  --royal-light: #a8202e;
+  --gold: #d4af37;
+  --gold-bright: #f4d77a;
+  --gold-deep: #a67c1a;
+  --bronze: #b07a2e;
+  --cream: #f7e9c4;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  body {
+    @apply text-foreground;
+    background:
+      radial-gradient(circle at 50% -10%, #a8202e 0%, transparent 55%),
+      radial-gradient(circle at 50% 110%, #7c1320 0%, transparent 55%),
+      linear-gradient(180deg, #4a0d14 0%, #3a0a10 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  html {
+    @apply font-serif;
+  }
+}
+
+/* ---------- Gold gradient text ---------- */
+.text-gold-gradient {
+  background: linear-gradient(
+    180deg,
+    #f9e9b0 0%,
+    #f4d77a 28%,
+    #d4af37 55%,
+    #a67c1a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.gold-border {
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.15),
+    inset 0 0 30px rgba(212, 175, 55, 0.08);
+}
+
+/* ---------- Floating petals ---------- */
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--petal-opacity, 0.8);
+  }
+  90% {
+    opacity: var(--petal-opacity, 0.8);
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--petal-drift, 40px))
+      rotate(var(--petal-spin, 360deg));
+    opacity: 0;
+  }
+}
+
+.petal {
+  position: absolute;
+  top: 0;
+  will-change: transform, opacity;
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+}
+
+/* ---------- Gold dust twinkle ---------- */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+.dust {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #f4d77a 0%, rgba(212, 175, 55, 0) 70%);
+  animation: twinkle ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---------- Marquee bulbs ---------- */
+@keyframes bulb-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    box-shadow:
+      0 0 4px #f4d77a,
+      0 0 8px rgba(244, 215, 122, 0.6);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 8px #fff4cf,
+      0 0 18px rgba(244, 215, 122, 0.95);
+  }
+}
+.bulb {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #fff7df, #f4d77a 55%, #c79a2a);
+  animation: bulb-glow 1.8s ease-in-out infinite;
+}
+
+/* ---------- Pulse ring for buttons ---------- */
+@keyframes soft-pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(244, 215, 122, 0.55),
+      0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow:
+      0 0 0 16px rgba(244, 215, 122, 0),
+      0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(244, 215, 122, 0),
+      0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+.pulse-gold {
+  animation: soft-pulse 2.4s ease-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.shimmer-divider {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d4af37 20%,
+    #f4d77a 50%,
+    #d4af37 80%,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petal,
+  .dust,
+  .bulb,
+  .pulse-gold,
+  .shimmer-divider {
+    animation: none !important;
+  }
+}
