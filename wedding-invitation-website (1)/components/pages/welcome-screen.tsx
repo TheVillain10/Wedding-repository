@@ -36,13 +36,6 @@ export function WelcomeScreen({ onOpen }: { onOpen: () => void }) {
         <GaneshaMandala size={252} />
       </motion.div>
 
-      <motion.p
-        variants={item}
-        className="mt-5 font-display text-xs uppercase tracking-[0.3em] text-gold/70"
-      >
-        Vakratunda Mahakaya
-      </motion.p>
-
       <motion.div variants={item} className="mt-6 w-full">
         <GoldDivider />
       </motion.div>
