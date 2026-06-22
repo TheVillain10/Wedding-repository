@@ -9,7 +9,7 @@ export function GoldDivider({ label }: { label?: string }) {
         />
       </svg>
       {label ? (
-        <span className="font-display text-[0.7rem] uppercase tracking-[0.35em] text-gold">
+        <span className="font-display text-[0.7rem] uppercase tracking-[0.35em] text-gold text-center">
           {label}
         </span>
       ) : null}
