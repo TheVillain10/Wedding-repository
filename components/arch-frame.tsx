@@ -19,7 +19,7 @@ export function ArchFrame({ children }: { children: ReactNode }) {
           borderBottomLeftRadius: "1.25rem",
           borderBottomRightRadius: "1.25rem",
           background:
-            "linear-gradient(180deg, rgba(28,63,150,0.55) 0%, rgba(7,16,58,0.85) 100%)",
+            "linear-gradient(180deg, rgba(168,32,46,0.55) 0%, rgba(58,10,16,0.85) 100%)",
           border: "1.5px solid rgba(212,175,55,0.6)",
           boxShadow:
             "0 0 0 1px rgba(212,175,55,0.18), inset 0 0 50px rgba(212,175,55,0.10), 0 20px 60px rgba(0,0,0,0.45)",

@@ -4,9 +4,10 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 export function GaneshaMandala({ size = 240 }: { size?: number }) {
-  const petals = Array.from({ length: 24 })
+  const petals = Array.from({ length: 28 })
+  const innerPetals = Array.from({ length: 28 })
   const outerRays = Array.from({ length: 48 })
-  const dots = Array.from({ length: 16 })
+  const dots = Array.from({ length: 24 })
 
   return (
     <div
@@ -38,7 +39,21 @@ export function GaneshaMandala({ size = 240 }: { size?: number }) {
             <stop offset="50%" stopColor="#d4af37" />
             <stop offset="100%" stopColor="#a67c1a" />
           </linearGradient>
+          {/* radial fill so each flower petal looks solid and dimensional */}
+          <radialGradient id="petalFill" cx="50%" cy="30%" r="75%">
+            <stop offset="0%" stopColor="#fff3c4" />
+            <stop offset="45%" stopColor="#e7c45c" />
+            <stop offset="100%" stopColor="#b5862a" />
+          </radialGradient>
+          <radialGradient id="petalFillInner" cx="50%" cy="35%" r="75%">
+            <stop offset="0%" stopColor="#f9e6a8" />
+            <stop offset="55%" stopColor="#d4af37" />
+            <stop offset="100%" stopColor="#9b6f1f" />
+          </radialGradient>
         </defs>
+
+        {/* solid filled garland band behind the flowers */}
+        <circle cx="100" cy="100" r="79" fill="none" stroke="url(#petalFill)" strokeWidth="26" opacity="0.32" />
 
         {/* fine outer rays */}
         {outerRays.map((_, i) => (
@@ -57,19 +72,43 @@ export function GaneshaMandala({ size = 240 }: { size?: number }) {
         <circle cx="100" cy="100" r="92" fill="none" stroke="url(#goldStroke)" strokeWidth="1.2" />
         <circle cx="100" cy="100" r="84" fill="none" stroke="url(#goldStroke)" strokeWidth="0.8" />
 
-        {/* lotus petals ring */}
+        {/* outer flower garland (filled, larger blossoms) */}
         {petals.map((_, i) => (
           <path
             key={`petal-${i}`}
-            d="M100 18 C108 34 108 50 100 64 C92 50 92 34 100 18 Z"
-            fill="none"
-            stroke="url(#goldStroke)"
-            strokeWidth="1"
+            d="M100 16 C111 32 111 54 100 70 C89 54 89 32 100 16 Z"
+            fill="url(#petalFill)"
+            stroke="#8a6418"
+            strokeWidth="0.6"
             transform={`rotate(${(360 / petals.length) * i} 100 100)`}
           />
         ))}
 
-        <circle cx="100" cy="100" r="58" fill="none" stroke="url(#goldStroke)" strokeWidth="1.2" />
+        {/* inner flower garland, offset to fill the gaps for a dense look */}
+        {innerPetals.map((_, i) => (
+          <path
+            key={`petal-in-${i}`}
+            d="M100 30 C108 44 108 60 100 72 C92 60 92 44 100 30 Z"
+            fill="url(#petalFillInner)"
+            stroke="#8a6418"
+            strokeWidth="0.5"
+            transform={`rotate(${(360 / innerPetals.length) * i + 360 / innerPetals.length / 2} 100 100)`}
+          />
+        ))}
+
+        {/* small bead at each flower tip */}
+        {petals.map((_, i) => (
+          <circle
+            key={`bead-${i}`}
+            cx="100"
+            cy="16"
+            r="2.2"
+            fill="#fff3c4"
+            transform={`rotate(${(360 / petals.length) * i} 100 100)`}
+          />
+        ))}
+
+        <circle cx="100" cy="100" r="58" fill="none" stroke="url(#goldStroke)" strokeWidth="2.4" />
 
         {/* dotted ring */}
         {dots.map((_, i) => {
